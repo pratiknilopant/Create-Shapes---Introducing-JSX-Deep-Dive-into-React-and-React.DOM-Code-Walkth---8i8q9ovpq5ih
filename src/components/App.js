@@ -12,8 +12,11 @@ const App = () => {
     };
   
     const handleAddShape = () => {
-      const newShapes = [...shapes, selectedShape];
-      setShapes(newShapes);
+      if (selectedShape === "square") {
+        setShapes([...shapes, "square"]);
+      } else if (selectedShape === "circle") {
+        setShapes([...shapes, "circle"]);
+      }
     };
 
   return (
