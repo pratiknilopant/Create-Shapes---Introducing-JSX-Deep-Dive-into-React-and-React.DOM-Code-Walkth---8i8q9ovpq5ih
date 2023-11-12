@@ -1,38 +1,26 @@
 import React from 'react'
 import '../styles/App.css';
-import React, { useState } from "react";
-
 const App = () => {
-
-    const [selectedShape, setSelectedShape] = useState("square");
-    const [shapes, setShapes] = useState([]);
-  
-    const handleShapeChange = (event) => {
-      setSelectedShape(event.target.value);
-    };
-  
-    const handleAddShape = () => {
-      if (selectedShape === "square") {
-        setShapes([...shapes, "square"]);
-      } else if (selectedShape === "circle") {
-        setShapes([...shapes, "circle"]);
-      }
-    };
-
+  const [arr,setArr] = React.useState([]);
+  function addDivWithShape(event){
+    let shapeValue = event.target.parentNode.children[0].value;
+    setArr((oldArr)=>{
+      const copyArr = [...oldArr,<div className={shapeValue.toLowerCase()}>{shapeValue}</div>]
+      return copyArr;
+    })
+  }
   return (
     <div id="main">
-      <div className="shape-creator">
-      <select value={selectedShape} onChange={handleShapeChange}>
-        <option value="square">Square</option>
-        <option value="circle">Circle</option>
-      </select>
-      <button onClick={handleAddShape}>Add Shape</button>
-      <div className="shapes-holder">
-        {shapes.map((shape, index) => (
-          <div key={index} className={`shape ${shape}`} />
-        ))}
+      <div id="shape-creator">
+        <select>
+          <option>Square</option>
+          <option>Circle</option>
+        </select>
+        <button onClick={addDivWithShape}>Add Shape</button>
       </div>
-    </div>
+      <div id="shapes-holder">
+        {arr}
+      </div>
     </div>
   )
 }
